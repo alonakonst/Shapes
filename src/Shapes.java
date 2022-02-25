@@ -1,5 +1,5 @@
 //last Euclidean distance is not done, triangle area needs to be done using its vertices, triangle method check() doesn't show right result
-
+//idk how to do tests as well
 import java.util.Arrays;
 import java.util.Scanner;
 
