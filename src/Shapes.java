@@ -1,36 +1,61 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
-abstract public class Shapes {  //This part till  public static void main(String[] args) is not ready 
+abstract public class Shapes {  //This part till  public static void main(String[] args) is not ready
+double x0;
+double y0;
 
-    public double[] center(){
-        return new double[0];
+    public void pointX(){
+        double x1; //coordinates of the point which going to be checked
+        Scanner inputx = new Scanner(System.in);
+        System.out.println("Type your point coordinate X: ");
+        x1 = inputx.nextDouble();
+        System.out.println("Your point coordinates are: [" + x1 + "]");
+        x0 = x1;
     }
-    public void area(){
-        System.out.println("area is ...");
+    public void pointY() {
+        double y1;
+        Scanner inputy = new Scanner(System.in);
+        System.out.println(" Type your point coordinate Y: ");
+        y1 = inputy.nextDouble();
+        System.out.println("Your point coordinates are: [" + y1 + "]");
+        y0 = y1;
     }
+
+    //public void area(){
+        //System.out.println("area is ...");
+    //}
     public void circumference(){
         System.out.println("Circumference is ...");
     }
+    public void check(){}
 
 
     public static void main(String[] args) {
-        Circle circle = new Circle(3.3,4.3,5.0);
+        Circle circle = new Circle(0,0,5.0);
+        circle.pointX();
+        circle.pointY();
         circle.center();
         circle.area();
         circle.circumference();
+        circle.check();
 
         Rectangle rectangle = new Rectangle(5.0, 10.0, 20.0, 30.0);
         rectangle.center();
         rectangle.area();
         rectangle.circumference();
+        rectangle.pointX();
+        rectangle.pointY();
+        rectangle.check();
 
-        Triangle triangle = new Triangle (2.2, 3.2, 2.0, 6.9,7.0,4.8);
+        Triangle triangle = new Triangle (0.0, 0.0, 10.0, 10.0,20.0,0.0);
         triangle.center();
         triangle.area();
         triangle.circumference();
-
+        triangle.pointX();
+        triangle.pointY();
+        triangle.check();
     }
-
 
 
     static class Circle extends Shapes {
@@ -44,7 +69,7 @@ abstract public class Shapes {  //This part till  public static void main(String
             radius = r;
         }
 
-        public double[] center(){
+        public double[] center() {
             double[] center = new double[2];
             center[0] = x;
             center[1] = y;
@@ -53,36 +78,50 @@ abstract public class Shapes {  //This part till  public static void main(String
 
         }
 
-        public void area(){
+        public void area() {
             double area = Math.PI * radius * radius;
             System.out.println("Area of the circle = " + area);
         }
 
-        public void circumference(){
+        public void circumference() {
             double circumference = Math.PI * radius * 2;
             System.out.println("Circumference of the circle = " + circumference);
         }
 
+
+        public void check() {
+            boolean pointcheckx = Math.abs(x0-x)<=radius;
+            boolean pointchecky = Math.abs(x0-x)<=radius;
+            if (pointcheckx && pointchecky) {
+                System.out.println("The point is inside the shape");
+            } else {
+                System.out.println("The point is not inside of the shape");
+            }
+        }
+
+
     }
 
     static class Rectangle extends Shapes {
-        public double x;
-        public double y;
+        public double x1;
+        public double y1;
         public double width;
         public double height;
 
 
-        public Rectangle(double x, double y, double w, double h) {
-            this.x = x;
-            this.y = y;
+
+
+        public Rectangle(double x1, double y1, double w, double h) {
+            this.x1 = x1;
+            this.y1 = y1;
             width = w;
             height = h;
         }
 
         public double[] center() {
             double[] center = new double[2];
-            center[0] = x + width / 2;   //need to check is these formulas are legit
-            center[1] = y + height / 2;
+            center[0] = x1 + width / 2;
+            center[1] = y1 + height / 2;
             System.out.println("Center of the rectangle has coordinates: " + Arrays.toString(center));
             return center;
         }
@@ -97,6 +136,22 @@ abstract public class Shapes {  //This part till  public static void main(String
             System.out.println("Circumference of the rectangle = " + circumference);
         }
 
+        public void check() {  //A point lies inside or not the rectangle if and only if it’s x-coordinate lies
+            // between the x-coordinate of the given bottom-right and top-left coordinates of the rectangle and
+            // y-coordinate lies between the y-coordinate of the given bottom-right and top-left coordinates
+            // (https://www.geeksforgeeks.org/check-if-a-point-lies-on-or-inside-a-rectangle-set-2/)
+            //We already have a top-left coordinates, but we have to find bottom right coordinates.
+            double x3 = this.x1+width;
+            double y3 = this.y1-height;
+            boolean pointcheckx = x1 <= x0 && x0 <= x3;
+            boolean pointchecky = y3 <= y0 && y0 <= y1;
+            if (pointcheckx && pointchecky) {
+                System.out.println("The point is inside the shape");
+            } else {
+                System.out.println("The point is not inside of the shape");
+            }
+            }
+
     }
 
     static class Triangle extends Shapes {
@@ -107,11 +162,9 @@ abstract public class Shapes {  //This part till  public static void main(String
         public double x3;
         public double y3;
 
-        double l1;   //These are three sides of the triangle
-        double l2;
-        double l3;
-
-
+        double thel1;   //These are three sides of the triangle
+        double thel2;
+        double thel3;
 
         public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
             this.x1 = x1;
@@ -131,22 +184,35 @@ abstract public class Shapes {  //This part till  public static void main(String
         }
 
         public void circumference(){
-            l1 = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-            l2 = Math.sqrt(Math.pow(x3-x2,2)+Math.pow(y3-y2,2));
-            l3 = Math.sqrt(Math.pow(x1-x3,2)+Math.pow(y1-y3,2));
+            double l1 = Math.sqrt(Math.pow(Math.abs(x2-x1),2)+Math.pow(Math.abs(y2-y1),2));
+            double l2 = Math.sqrt(Math.pow(Math.abs(x3-x2),2)+Math.pow(Math.abs(y3-y2),2));
+            double l3 = Math.sqrt(Math.pow(Math.abs(x1-x3),2)+Math.pow(Math.abs(y1-y3),2));
             double circumference = l1+ l2+ l3;
             System.out.println("Circumference of the triangle is: " + circumference);
         }
 
         public void area(){
-            double s = (l1 + l2 + l3)/2; //semi perimeter
-            double area =  Math.sqrt(s*(s-l1)*(s-l2)*(s-l3));
+            double area = (x1*(Math.abs(y2-y3)) + x2*(Math.abs(y3 -y1)) + x3*(Math.abs(y1-y2)))/2;
             System.out.println("Area of the triangle is: " + area);
         }
 
+        public void check(){
+                double area = (x1*(Math.abs(y2-y3)) + x2*(Math.abs(y3 -y1)) + x3*(Math.abs(y1-y2)))/2;
+                double area1 = (x1*(Math.abs(y2-y0)) + x2*(Math.abs(y0 -y1)) + x0*(Math.abs(y1-y2)))/2;
+                double area2 = (x1*(Math.abs(y0-y3)) + x0*(Math.abs(y3 -y1)) + x3*(Math.abs(y1-y0)))/2;
+                double area3 = (x0*(Math.abs(y2-y3)) + x2*(Math.abs(y3 -y0)) + x3*(Math.abs(y0-y2)))/2;
 
+                System.out.println(area1 + area2 + area3);
+                System.out.println("Area is:" + area);
+                boolean pointcheck = area == area1+ area2+ area3 ;
+                if (pointcheck) {
+                    System.out.println("The point is inside the shape");
+                } else {
+                    System.out.println("The point is not inside of the shape");
+                }
+            }
+        }
 
-    }
 
 
 
