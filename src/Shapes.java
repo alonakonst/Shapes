@@ -1,11 +1,14 @@
+//last Euclidean distance is not done, triangle area needs to be done using its vertices, triangle method check() doesn't show right result
+
 import java.util.Arrays;
 import java.util.Scanner;
 
-abstract public class Shapes {  //This part till  public static void main(String[] args) is not ready
+abstract public class Shapes {  //This part till  public static void main(String[] args) is not ready, need more variables that are both in shapes and its child classes.
 double x0;
 double y0;
 
-    public void pointX(){
+    public void pointX(){   //methods pointX() and point(Y) are called for each object. this is to check if the point is inside the shape. For
+        //each shape it's called separately, maybe we should use one point to check all of them.
         double x1; //coordinates of the point which going to be checked
         Scanner inputx = new Scanner(System.in);
         System.out.println("Type your point coordinate X: ");
@@ -27,7 +30,7 @@ double y0;
     //}
     public void circumference(){
         System.out.println("Circumference is ...");
-    }
+    }  //idk if we should leave them empty her or what.
     public void check(){}
 
 
@@ -69,7 +72,7 @@ double y0;
             radius = r;
         }
 
-        public double[] center() {
+        public double[] center() { //maybe its better not to use array idk
             double[] center = new double[2];
             center[0] = x;
             center[1] = y;
@@ -107,9 +110,6 @@ double y0;
         public double y1;
         public double width;
         public double height;
-
-
-
 
         public Rectangle(double x1, double y1, double w, double h) {
             this.x1 = x1;
@@ -162,9 +162,9 @@ double y0;
         public double x3;
         public double y3;
 
-        double thel1;   //These are three sides of the triangle
-        double thel2;
-        double thel3;
+        double l1;   //These are three sides of the triangle, //there were used before for area as well
+        double l2;
+        double l3;
 
         public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
             this.x1 = x1;
@@ -191,12 +191,12 @@ double y0;
             System.out.println("Circumference of the triangle is: " + circumference);
         }
 
-        public void area(){
+        public void area(){  //i think we should use vertices
             double area = (x1*(Math.abs(y2-y3)) + x2*(Math.abs(y3 -y1)) + x3*(Math.abs(y1-y2)))/2;
             System.out.println("Area of the triangle is: " + area);
         }
 
-        public void check(){
+        public void check(){  //this way of doing is wrong (i think) , idk how to do check for triangle
                 double area = (x1*(Math.abs(y2-y3)) + x2*(Math.abs(y3 -y1)) + x3*(Math.abs(y1-y2)))/2;
                 double area1 = (x1*(Math.abs(y2-y0)) + x2*(Math.abs(y0 -y1)) + x0*(Math.abs(y1-y2)))/2;
                 double area2 = (x1*(Math.abs(y0-y3)) + x0*(Math.abs(y3 -y1)) + x3*(Math.abs(y1-y0)))/2;
