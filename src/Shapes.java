@@ -27,29 +27,13 @@ double y0;
     }
 
     public double[] center(){
-        return new double[]{};
-    }
-    public void area(){
-        System.out.println("area is ...");
-    }
-    public void circumference(){
-        System.out.println("Circumference is ...");
-    }  //idk if we should leave them empty her or what.
+        return new double[]{};}
+
+    public void area(){}
+
+    public void circumference(){}
+
     public void check(){}
-
-    public void distanceToTriangle(){
-
-    }
-
-    public void distanceToRectangle(){
-
-    }
-
-    public void distanceToCircle(){
-
-
-    }
-
 
     public static void main(String[] args) {
 //Here are created three objects: circle, rectangle and triangle.
@@ -88,9 +72,9 @@ double y0;
 that are listed in class Shapes, however they are changed according to circle properies.
 Same for class Rectangle and Triangle.  */
     static class Circle extends Shapes {
-        public double x;
-        public double y;
-        public double radius;
+        private double x;
+        private double y;
+        private double radius;
 
         //Circle is constructed from a coordinates of the center and radius
         public Circle(double x, double y, double r) {
@@ -113,15 +97,13 @@ Same for class Rectangle and Triangle.  */
        //area and circumference is calculated through radius
          @Override
          public void area() {
-            double area = Math.PI * radius * radius;
-            System.out.println("Area of the circle = " + area);
+            System.out.println("Area of the circle = " + Math.PI * radius * radius );
         }
         @Override
         public void circumference() {
             double circumference = Math.PI * radius * 2;
             System.out.println("Circumference of the circle = " + circumference);
         }
-
 
         //this method checks if the point is within area of the circle
         @Override
@@ -137,10 +119,10 @@ Same for class Rectangle and Triangle.  */
     }
 
     static class Rectangle extends Shapes {
-        public double x1;
-        public double y1;
-        public double width;
-        public double height;
+        private double x1;
+        private double y1;
+        private double width;
+        private double height;
 
         //Rectangle is constructed using coordinates od top left corner as well as width and height
         public Rectangle(double x1, double y1, double w, double h) {
@@ -162,8 +144,7 @@ Same for class Rectangle and Triangle.  */
 
         @Override
         public void area(){
-            double area = width * height;
-            System.out.println("Area of the rectangle = " + area);
+            System.out.println("Area of the rectangle = " + width * height);
         }
 
         @Override
@@ -239,7 +220,6 @@ Same for class Rectangle and Triangle.  */
         public void area(){
             double area = Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
             System.out.println("Area of the triangle is: " + area);
-
         }
 
         /*point is checked by calculating areas of three triangles that the point and points of triangle compares.
@@ -258,11 +238,5 @@ Same for class Rectangle and Triangle.  */
                 System.out.println("The point is not inside of the shape");}
         }
 
-
-
     }
-
-
-
-
 }
