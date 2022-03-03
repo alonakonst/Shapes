@@ -1,4 +1,4 @@
-//last Euclidean distance is not done
+
 //idk how to do tests as well
 import java.awt.geom.Point2D;
 import java.util.Scanner;
@@ -34,7 +34,23 @@ double y0;
 
     public void check(){}
 
+    public static void Distance(Point2D.Double Circle_center, Point2D.Double Rectangle_center, Point2D.Double Triangle_center){
+        double dX1 = Circle_center.x - Rectangle_center.x;
+        double dY1 = Circle_center.y - Rectangle_center.y;
+        double dCircleRectangle = Math.sqrt(dX1*dX1 +dY1*dY1);
+        System.out.println("Distance between circle and rectangle is:" + dCircleRectangle);
 
+        double dX2 = Circle_center.x - Triangle_center.x;
+        double dY2 = Circle_center.y - Triangle_center.y;
+        double dCircleTriangle = Math.sqrt(dX2*dX2 +dY2*dY2);
+        System.out.println("Distance between circle and triangle is:" + dCircleTriangle);
+
+        double dX3 = Rectangle_center.x - Triangle_center.x;
+        double dY3 = Rectangle_center.y - Triangle_center.y;
+        double dRectangleTriangle = Math.sqrt(dX3*dX3 +dY3*dY3);
+        System.out.println("Distance between rectangle and triangle is:" + dRectangleTriangle);
+
+    }
 
     public static void main(String[] args) {
 //Here are created three objects: circle, rectangle and triangle.
@@ -68,20 +84,8 @@ double y0;
         triangle.pointY();
         triangle.check();
 
-        double dX1 = Circle_center.x - Rectangle_center.x;
-        double dY1 = Circle_center.y - Rectangle_center.y;
-        double dCircleRectangle = Math.sqrt(dX1*dX1 +dY1*dY1);
-        System.out.println("Distance between circle and rectangle is:" + dCircleRectangle);
-
-        double dX2 = Circle_center.x - Triangle_center.x;
-        double dY2 = Circle_center.y - Triangle_center.y;
-        double dCircleTriangle = Math.sqrt(dX2*dX2 +dY2*dY2);
-        System.out.println("Distance between circle and triangle is:" + dCircleTriangle);
-
-        double dX3 = Rectangle_center.x - Triangle_center.x;
-        double dY3 = Rectangle_center.y - Triangle_center.y;
-        double dRectangleTriangle = Math.sqrt(dX3*dX3 +dY3*dY3);
-        System.out.println("Distance between rectangle and triangle is:" + dRectangleTriangle);
+        System.out.println("Distances between shapes are: ");
+        Shapes.Distance(circle.center(), rectangle.center(), triangle.center());
 
     }
 
@@ -177,8 +181,7 @@ Same for class Rectangle and Triangle.  */
             if (pointcheckx && pointchecky) {
                 System.out.println("The point is inside the shape");
             } else {
-                System.out.println("The point is not inside of the shape");
-            }
+                System.out.println("The point is not inside of the shape");}
             }
 
 
