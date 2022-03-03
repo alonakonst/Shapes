@@ -24,7 +24,7 @@ class Rectangle extends Shapes {
 
     @Override
     public double area(){
-        double area = width * height;
+        double area = Math.abs(width * height);
         System.out.println("Area of the rectangle = " + area);
         return area;
     }
