@@ -36,7 +36,7 @@ class Triangle extends Shapes {
         return circumference;
     }
 
-    //formula for are was found here https://www.geeksforgeeks.org/check-whether-a-given-point-lies-inside-a-triangle-or-not/
+    //formula for area was found here https://www.geeksforgeeks.org/check-whether-a-given-point-lies-inside-a-triangle-or-not/
     //it is also possible to calculate with semi perimeter
     @Override
     public double area(){
@@ -44,7 +44,6 @@ class Triangle extends Shapes {
         System.out.println("Area of the triangle is: " + area);
         return area;
     }
-
     /*point is checked by calculating areas of three triangles that the point and points of triangle compares.
     If sum of these areas is equal to area of triangle, then it is within the triangle.*/
     @Override
