@@ -1,7 +1,6 @@
 //last Euclidean distance is not done
 //idk how to do tests as well
-
-import java.util.Arrays;
+import java.awt.geom.Point2D;
 import java.util.Scanner;
 
 abstract public class Shapes {  //This part till  public static void main(String[] args) is not ready, need more variables that are both in shapes and its child classes.
@@ -26,8 +25,8 @@ double y0;
         y0 = y1;
     }
 
-    public double[] center(){
-        return new double[]{};}
+    public Point2D.Double center(){
+        return new Point2D.Double();}
 
     public void area(){}
 
@@ -35,22 +34,24 @@ double y0;
 
     public void check(){}
 
+
+
     public static void main(String[] args) {
 //Here are created three objects: circle, rectangle and triangle.
 
         System.out.println("Info about circle");
-        Circle circle = new Circle(5,0,5.0);
-        circle.pointX();
-        circle.pointY();
-        circle.center();
+        Circle circle = new Circle(0,0,5.0);
+        Point2D.Double Circle_center = circle.center();
         circle.area();
         circle.circumference();
+        circle.pointX();
+        circle.pointY();
         circle.check();
 
 
         System.out.println("Info about rectangle");
-        Rectangle rectangle = new Rectangle(5.0, 10.0, 20.0, 30.0);
-        rectangle.center();
+        Rectangle rectangle = new Rectangle(-2, 2, 4, -4);
+        Point2D.Double Rectangle_center = rectangle.center();
         rectangle.area();
         rectangle.circumference();
         rectangle.pointX();
@@ -60,13 +61,30 @@ double y0;
 
         System.out.println("Info about triangle");
         Triangle triangle = new Triangle (0.0, 0.0, 10.0, 10.0,20.0,0.0);
-        triangle.center();
+        Point2D.Double Triangle_center = triangle.center();
         triangle.area();
         triangle.circumference();
         triangle.pointX();
         triangle.pointY();
         triangle.check();
+
+        double dX1 = Circle_center.x - Rectangle_center.x;
+        double dY1 = Circle_center.y - Rectangle_center.y;
+        double dCircleRectangle = Math.sqrt(dX1*dX1 +dY1*dY1);
+        System.out.println("Distance between circle and rectangle is:" + dCircleRectangle);
+
+        double dX2 = Circle_center.x - Triangle_center.x;
+        double dY2 = Circle_center.y - Triangle_center.y;
+        double dCircleTriangle = Math.sqrt(dX2*dX2 +dY2*dY2);
+        System.out.println("Distance between circle and triangle is:" + dCircleTriangle);
+
+        double dX3 = Rectangle_center.x - Triangle_center.x;
+        double dY3 = Rectangle_center.y - Triangle_center.y;
+        double dRectangleTriangle = Math.sqrt(dX3*dX3 +dY3*dY3);
+        System.out.println("Distance between rectangle and triangle is:" + dRectangleTriangle);
+
     }
+
 
 /*class of Circle combines methods,
 that are listed in class Shapes, however they are changed according to circle properies.
@@ -84,14 +102,9 @@ Same for class Rectangle and Triangle.  */
         }
 
         //Center coordinates are stored in array
-    @Override
-    public double[] center() {
-            double[] center = new double[2];
-            center[0] = this.x;
-            center[1] = this.y;
-            System.out.println("Center of the circle has coordinates: " + Arrays.toString(center));
-            return new double[]{center[0],center[1]};
-
+        @Override
+        public Point2D.Double center() {
+            return new Point2D.Double(this.x,this.y);
         }
 
        //area and circumference is calculated through radius
@@ -132,14 +145,12 @@ Same for class Rectangle and Triangle.  */
             height = h;
         }
 
-        //center(), area() and circumference() methods uses proprties of rectangle
+        //center(), area() and circumference() methods uses properties of rectangle
         @Override
-        public double[] center() {
-            double[] center = new double[2];
-            center[0] = x1 + width / 2;
-            center[1] = y1 + height / 2;
-            System.out.println("Center of the rectangle has coordinates: " + Arrays.toString(center));
-            return center;
+        public Point2D.Double center() {
+            double x = this.x1 + width / 2;
+            double y = this.y1 + height / 2;
+            return new Point2D.Double(x,y);
         }
 
         @Override
@@ -194,14 +205,11 @@ Same for class Rectangle and Triangle.  */
         }
 
         //formulas are found here https://study.com/academy/lesson/how-to-find-the-centroid-of-a-triangle.html
-
         @Override
-        public double[] center() {
-            double[] center = new double[2];
-            center[0] = (x1 + x2 + x3) / 3;
-            center[1] = (y1 + y2 + y3) / 3;
-            System.out.println("Center of the triangle has coordinates: " + Arrays.toString(center));
-            return center;
+        public Point2D.Double center() {
+            double x = (x1 + x2 + x3) / 3;
+            double y = (y1 + y2 + y3) / 3;
+            return new Point2D.Double(x,y);
         }
 
         //circumference is calculated by finding three lines of triangle
@@ -230,7 +238,6 @@ Same for class Rectangle and Triangle.  */
             double area1 = Math.abs((x0 * (y2 - y3) + x2 * (y3 - y0) + x3 * (y0 - y2)) / 2.0);
             double area2 = Math.abs((x1 * (y0 - y3) + x0 * (y3 - y1) + x3 * (y1 - y0)) / 2.0);
             double area3 = Math.abs((x1 * (y2 - y0) + x2 * (y0 - y1) + x0 * (y1 - y2)) / 2.0);
-
             boolean pointcheck = area == area1 + area2 + area3;
             if (pointcheck) {
                 System.out.println("The point is inside the shape");
