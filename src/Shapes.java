@@ -1,5 +1,4 @@
-
-//idk how to do tests as well
+//idk how to do testing
 import java.awt.geom.Point2D;
 import java.util.Scanner;
 
@@ -38,17 +37,17 @@ double y0;
         double dX1 = Circle_center.x - Rectangle_center.x;
         double dY1 = Circle_center.y - Rectangle_center.y;
         double dCircleRectangle = Math.sqrt(dX1*dX1 +dY1*dY1);
-        System.out.println("Distance between circle and rectangle is:" + dCircleRectangle);
+        System.out.println("Distance between circle and rectangle is: " + dCircleRectangle);
 
         double dX2 = Circle_center.x - Triangle_center.x;
         double dY2 = Circle_center.y - Triangle_center.y;
         double dCircleTriangle = Math.sqrt(dX2*dX2 +dY2*dY2);
-        System.out.println("Distance between circle and triangle is:" + dCircleTriangle);
+        System.out.println("Distance between circle and triangle is: " + dCircleTriangle);
 
         double dX3 = Rectangle_center.x - Triangle_center.x;
         double dY3 = Rectangle_center.y - Triangle_center.y;
         double dRectangleTriangle = Math.sqrt(dX3*dX3 +dY3*dY3);
-        System.out.println("Distance between rectangle and triangle is:" + dRectangleTriangle);
+        System.out.println("Distance between rectangle and triangle is :" + dRectangleTriangle);
 
     }
 
@@ -56,8 +55,8 @@ double y0;
 //Here are created three objects: circle, rectangle and triangle.
 
         System.out.println("Info about circle");
-        Circle circle = new Circle(0,0,5.0);
-        Point2D.Double Circle_center = circle.center();
+        Circle circle = new Circle(0,4,5.0);
+        circle.center();
         circle.area();
         circle.circumference();
         circle.pointX();
@@ -67,7 +66,7 @@ double y0;
 
         System.out.println("Info about rectangle");
         Rectangle rectangle = new Rectangle(-2, 2, 4, -4);
-        Point2D.Double Rectangle_center = rectangle.center();
+        rectangle.center();
         rectangle.area();
         rectangle.circumference();
         rectangle.pointX();
@@ -77,7 +76,7 @@ double y0;
 
         System.out.println("Info about triangle");
         Triangle triangle = new Triangle (0.0, 0.0, 10.0, 10.0,20.0,0.0);
-        Point2D.Double Triangle_center = triangle.center();
+        triangle.center();
         triangle.area();
         triangle.circumference();
         triangle.pointX();
@@ -94,9 +93,9 @@ double y0;
 that are listed in class Shapes, however they are changed according to circle properies.
 Same for class Rectangle and Triangle.  */
     static class Circle extends Shapes {
-        private double x;
-        private double y;
-        private double radius;
+        private final double x;
+        private final double y;
+        private final double radius;
 
         //Circle is constructed from a coordinates of the center and radius
         public Circle(double x, double y, double r) {
@@ -105,7 +104,7 @@ Same for class Rectangle and Triangle.  */
             radius = r;
         }
 
-        //Center coordinates are stored in array
+        //Center coordinates
         @Override
         public Point2D.Double center() {
             return new Point2D.Double(this.x,this.y);
@@ -136,10 +135,10 @@ Same for class Rectangle and Triangle.  */
     }
 
     static class Rectangle extends Shapes {
-        private double x1;
-        private double y1;
-        private double width;
-        private double height;
+        private final double x1;
+        private final double y1;
+        private final double width;
+        private final double height;
 
         //Rectangle is constructed using coordinates od top left corner as well as width and height
         public Rectangle(double x1, double y1, double w, double h) {
@@ -190,12 +189,12 @@ Same for class Rectangle and Triangle.  */
     }
 
     static class Triangle extends Shapes {
-        private double x1;
-        private double y1;
-        private double x2;
-        private double y2;
-        private double x3;
-        private double y3;
+        private final double x1;
+        private final double y1;
+        private final double x2;
+        private final double y2;
+        private final double x3;
+        private final double y3;
 
         //Triangle is constructed using coordinates of three points
         public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
