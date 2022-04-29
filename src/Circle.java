@@ -21,13 +21,15 @@ class Circle extends Shapes {
     @Override
     public double area() {
         double area = Math.PI * radius * radius;
-        System.out.println("Area of the circle = " + area);
+      //  System.out.println("Area of the circle = " + area);
         return area;
+
+
     }
     @Override
     public double circumference() {
         double circumference = Math.PI * Math.abs(radius) * 2;
-        System.out.println("Circumference of the circle = " + circumference);
+       // System.out.println("Circumference of the circle = " + circumference);
         return circumference;
     }
 
@@ -37,9 +39,11 @@ class Circle extends Shapes {
         boolean pointcheckx = Math.abs(point.x-this.x)<=radius;
         boolean pointchecky = Math.abs(point.y-this.x)<=radius;
         if (pointcheckx && pointchecky) {
-            System.out.println("The point is inside the shape");
+            System.out.println("The point is inside the circle");
         } else {
-            System.out.println("The point is not inside of the shape");}
+            System.out.println("The point is not inside of the circle");}
     }
+
+
 
 }

@@ -28,24 +28,28 @@ class Triangle extends Shapes {
     //circumference is calculated by finding three lines of triangle
     @Override
     public double circumference(){
-        double l1 = Math.sqrt(Math.pow(Math.abs(x2-x1),2)+Math.pow(Math.abs(y2-y1),2));
-        double l2 = Math.sqrt(Math.pow(Math.abs(x3-x2),2)+Math.pow(Math.abs(y3-y2),2));
-        double l3 = Math.sqrt(Math.pow(Math.abs(x1-x3),2)+Math.pow(Math.abs(y1-y3),2));
-        double circumference = l1+ l2+ l3;
-        System.out.println("Circumference of the triangle is: " + circumference);
+        double a = Math.sqrt(Math.pow(Math.abs(x2-x1),2)+Math.pow(Math.abs(y2-y1),2));
+        double b = Math.sqrt(Math.pow(Math.abs(x3-x2),2)+Math.pow(Math.abs(y3-y2),2));
+        double c = Math.sqrt(Math.pow(Math.abs(x1-x3),2)+Math.pow(Math.abs(y1-y3),2));
+        double circumference = a+ b+ c;
         return circumference;
+
     }
 
-    //formula for area was found here https://www.geeksforgeeks.org/check-whether-a-given-point-lies-inside-a-triangle-or-not/
-    //it is also possible to calculate with semi perimeter
+
     @Override
+    //Formula for finding area from half perimeter
     public double area(){
-        double area = Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
-        System.out.println("Area of the triangle is: " + area);
+        double a = Math.sqrt(Math.pow(Math.abs(x2-x1),2)+Math.pow(Math.abs(y2-y1),2));
+        double b = Math.sqrt(Math.pow(Math.abs(x3-x2),2)+Math.pow(Math.abs(y3-y2),2));
+        double c = Math.sqrt(Math.pow(Math.abs(x1-x3),2)+Math.pow(Math.abs(y1-y3),2));
+        double s = (a+b+c)/2;
+        double area = Math.sqrt(s*(s-a)*(s-b)*(s-c));
         return area;
     }
     /*point is checked by calculating areas of three triangles that the point and points of triangle compares.
     If sum of these areas is equal to area of triangle, then it is within the triangle.*/
+    //formula for area was found here https://www.geeksforgeeks.org/check-whether-a-given-point-lies-inside-a-triangle-or-not/
     @Override
     public void check(Point2D.Double point) {
         double area1 = Math.abs((point.x * (y2 - y3) + x2 * (y3 - point.y) + x3 * (point.y - y2)) / 2.0);
@@ -53,9 +57,9 @@ class Triangle extends Shapes {
         double area3 = Math.abs((x1 * (y2 - point.y) + x2 * (point.y - y1) + point.x * (y1 - y2)) / 2.0);
         boolean pointCheck = area() == area1 + area2 + area3;
         if (pointCheck) {
-            System.out.println("The point is inside the shape");
+            System.out.println("The point is inside the triangle");
         } else {
-            System.out.println("The point is not inside of the shape");}
+            System.out.println("The point is not inside of the triangle");}
     }
 
 }

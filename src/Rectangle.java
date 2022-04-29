@@ -25,14 +25,13 @@ class Rectangle extends Shapes {
     @Override
     public double area(){
         double area = Math.abs(width * height);
-        System.out.println("Area of the rectangle = " + area);
         return area;
     }
 
+    //taking absolute value for both width and height to calculate a circumference
     @Override
     public double circumference(){
-        double circumference = (Math.abs(width + height)) * 2;
-        System.out.println("Circumference of the rectangle = " + circumference);
+        double circumference = (Math.abs(width) + Math.abs(height)) * 2;
         return circumference;
     }
 
@@ -47,12 +46,9 @@ class Rectangle extends Shapes {
         boolean pointcheckx = x1 <= point.x && point.x <= x3;
         boolean pointchecky = y3 <= point.x && point.y <= y1;
         if (pointcheckx && pointchecky) {
-            System.out.println("The point is inside the shape");
+            System.out.println("The point is inside the rectangle");
         } else {
-            System.out.println("The point is not inside of the shape");}
+            System.out.println("The point is not inside of the rectangle");}
     }
-
-
-
 
 }
